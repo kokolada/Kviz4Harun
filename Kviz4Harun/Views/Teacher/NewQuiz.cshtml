@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "NewQuiz";
+}
+
+<div class="jumbotron">
+    <h1>eMekteb Kviz</h1>
+    <p class="lead">
+        1. Kreirajte novi kviz <br />
+        2. Dodajte pitanja <br />
+        3. Objavite kreirani kviz
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Novi kviz</h2>
+    </div>
+    <div class="col-md-6" id="addQuizDiv">
+        @using (Html.BeginForm("NewQuiz", "Teacher"))
+        {
+            <input type="text" name="QuizName" value="" required class="form-control input-lg" placeholder="Naziv kviza" />
+            <br />
+            <input type="submit" class="btn btn-primary" value="kreiraj kviz" />
+        }
+    </div>
+</div>

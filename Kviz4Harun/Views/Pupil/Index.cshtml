@@ -1,0 +1,29 @@
+﻿@model Kviz4Harun.ViewModels.Pupil.PupilIndexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+    <h1>@Model.username</h1>
+    <p class="lead">Sesije</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-unstyled">
+            <li>
+                <h2>
+                    <strong>Naziv | Rezultat | Datum igranja - Trajanje(minute) | igraj</strong>
+                </h2>
+            </li>
+            @foreach (var session in Model.QuizSessions)
+            {
+                <li>
+                    <h2>
+                        @session.QuizName | @session.ResultPercentage | @session.StartDate.ToString("dd.mm.yyyy.") - @session.QuizDuration | <a href="/Quiz/NewSession/@session.QuizvId">igraj</a>
+                    </h2>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

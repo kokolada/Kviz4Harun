@@ -1,0 +1,39 @@
+﻿@model Kviz4Harun.ViewModels.Home.HomeIndexViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>eMekteb Kviz</h1>
+    <p class="lead">Igrajte kviz i provjerite svoje znanje!(ili ne znanje)</p>
+    <p>
+        ToDo: <br />
+        - kreiranje kviza od strane ucitelja <br />
+        - timer koji tece (ne refresha ga ajax), kad istekne kviz se automatski zavrsava <br />
+        - bilo kakav izlazak sa kviza takodjer zavrsava kviz (http://stackoverflow.com/questions/18783535/jquery-beforeunload-when-closing-not-leaving-the-page)
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-unstyled">
+            <li>
+                <h2>
+                    <strong>Naziv | Kreirao - datum kreiranja</strong>
+                </h2>
+            </li>
+            @foreach (var quiz in Model.AvailableQuizes)
+            {
+                <li>
+                    <h2>
+                        @quiz.Name | @quiz.CreatedBy - @quiz.CreatedAt.ToString("dd.mm.yyyy.")
+                        @if (Kviz4Harun.Helpers.Autentifikacija.GetLogiraniKorisnik(Context) != null)
+                        {
+                            <span>| </span><a href="/Quiz/NewSession/@quiz.vId">igraj </a>
+                        }
+                    </h2>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

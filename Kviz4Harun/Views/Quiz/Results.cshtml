@@ -1,0 +1,62 @@
+﻿@model Kviz4Harun.Models.QuizSession
+
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Results</h2>
+
+<div>
+    <h4>QuizSession</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quiz.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quiz.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorrectAnswers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorrectAnswers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WrongAnswers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WrongAnswers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FinishedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinishedAt)
+        </dd>
+
+    </dl>
+</div>

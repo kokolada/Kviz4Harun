@@ -1,0 +1,11 @@
+﻿@model Kviz4Harun.ViewModels.Quiz.NewSessionViewModel
+
+<h1>@Model.Name</h1>
+<p class="lead">Kreirao: @Model.Teacher</p>
+<p class="lead">Datum kreiranja: @Model.CreatedAt.ToString("dd.mm.yyyy.")</p>
+
+<div id="CurrentQuestionId">
+
+    @Html.Partial("_QuizQuestionPrevNextPartial", Model)
+
+</div>

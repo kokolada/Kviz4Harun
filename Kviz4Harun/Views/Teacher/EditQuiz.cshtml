@@ -1,0 +1,33 @@
+﻿@model Kviz4Harun.ViewModels.Teacher.EditQuizViewModel
+@{
+    ViewBag.Title = "EditQuiz";
+}
+
+<div class="jumbotron">
+    <h1>eMekteb Kviz</h1>
+    <p class="lead">
+        <span style="text-decoration: line-through;">1. Kreirajte novi kviz</span> <br />
+        2. Dodajte pitanja <br />
+        3. Objavite kreirani kviz
+    </p>
+</div>
+
+<div class="row">
+    <div id="ajaxTargetId">
+        @Html.Partial("_AddQuizQuestionPartial")
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var i = 2;
+        function addAnswerOption(e) {
+            var jqe = $(e);
+            var questionoption = '<input type="text" name="NewQuestion.Answers['+ i +'].Text" class="form-control qoption" placeholder="odgovor na pitanje" />';
+            var label = '<label>Tacan odgovor: </label>';
+            var questionCbx = '<input class="check-box" data-val="true" data-val-required="The IsCorrect field is required." id="NewQuestion_Answers_' + i + '__IsCorrect" name="NewQuestion.Answers[' + i + '].IsCorrect" type="checkbox" value="true" /><input name="NewQuestion.Answers[' + i + '].IsCorrect" type="hidden" value="false" /> <br />';
+            jqe.before(questionoption, label, questionCbx);
+            i++;
+        }
+    </script>
+}

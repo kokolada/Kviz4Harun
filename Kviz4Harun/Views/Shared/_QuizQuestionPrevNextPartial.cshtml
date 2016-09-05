@@ -1,0 +1,43 @@
+﻿@model Kviz4Harun.ViewModels.Quiz.NewSessionViewModel
+
+<h2>@Model.CurrentQuestion.Text</h2>
+
+@foreach (var option in Model.CurrentQuestion.PossibleAnswers)
+{
+    <label>@option.Text</label>
+    if (Model.CurrentQuestion.ChosenAnswerId != null && Model.CurrentQuestion.ChosenAnswerId == option.Id)
+    {
+        <input onclick="submitClosestForm(this, @Model.CurrentQuestion.Id, @Model.SessionId)" type="radio" name="Answer" value="@option.Id" checked /> <br />
+    }
+    else
+    {
+        <input onclick="submitClosestForm(this, @Model.CurrentQuestion.Id, @Model.SessionId)" type="radio" name="Answer" value="@option.Id" /> <br />
+    }
+}
+
+@if (Model.CurrentQuestion.SeqNumber != 1)
+{
+    using (Ajax.BeginForm("PreviousQuestion", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "CurrentQuestionId", InsertionMode = InsertionMode.Replace }))
+    {
+        <input type="hidden" name="SessionId" value="@Model.SessionId" />
+        <input type="hidden" name="SeqNumber" value="@Model.CurrentQuestion.SeqNumber" />
+        <input type="submit" class="btn btn-primary" value="Predhodno pitanje" />
+    }
+}
+@if (!Model.CurrentQuestion.IsLastQuestion)
+{
+    using (Ajax.BeginForm("NextQuestion", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "CurrentQuestionId", InsertionMode = InsertionMode.Replace }))
+    {
+        <input type="hidden" name="SessionId" value="@Model.SessionId" />
+        <input type="hidden" name="SeqNumber" value="@Model.CurrentQuestion.SeqNumber" />
+        <input type="submit" class="btn btn-primary" value="Slijedece pitanje" />
+    }
+}
+else
+{
+    using (Html.BeginForm("EndQuiz", "Quiz", method: FormMethod.Post))
+    {
+        <input type="hidden" name="SessionId" value="@Model.SessionId" />
+        <input type="submit" class="btn btn-danger" value="Zavrsi kviz" />
+    }
+}

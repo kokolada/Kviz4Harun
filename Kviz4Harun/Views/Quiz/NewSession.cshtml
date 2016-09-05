@@ -1,0 +1,28 @@
+﻿@model Kviz4Harun.ViewModels.Quiz.NewSessionViewModel
+@{
+    ViewBag.Title = "NewSession";
+}
+
+<div id="quizContent" class="jumbotron">
+    <h1>@Model.Name</h1>
+    <p class="lead">Kreirao: @Model.Teacher</p>
+    <p class="lead">Datum kreiranja: @Model.CreatedAt.ToString("dd.mm.yyyy.")</p>
+
+    @using (Ajax.BeginForm("StartQuiz", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "quizContent", InsertionMode = InsertionMode.Replace }))
+    {
+        <input type="hidden" name="QuizvId" value="@Model.vId" />
+        <input type="submit" value="Zapocni" class="btn btn-lg btn-primary" />
+    }
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        function submitClosestForm(e, questionId, sessionId) {
+            $.ajax({
+                method: "POST",
+                url: "/Quiz/TryAnswer",
+                data: { SessionId: sessionId, QuestionId: questionId, Answer: e.value }
+            });
+        }
+    </script>
+}

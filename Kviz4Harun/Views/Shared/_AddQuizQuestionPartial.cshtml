@@ -1,0 +1,41 @@
+﻿@model Kviz4Harun.ViewModels.Teacher.EditQuizViewModel
+
+<div class="col-md-6">
+    @using (Ajax.BeginForm("AddQuestions", "Teacher", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "ajaxTargetId", InsertionMode = InsertionMode.Replace }))
+    {
+        <h3>Dodajte pitanje</h3>
+        @Html.TextBoxFor(m => m.NewQuestion.Text, new { @class = "form-control input-lg", placeholder = "Text pitanja" }) <br />
+        <input type="text" name="NewQuestion.Answers[0].Text" class="form-control qoption" placeholder="odgovor na pitanje" />
+        <label>Tacan odgovor: </label>
+        @Html.EditorFor(x => x.NewQuestion.Answers[0].IsCorrect)
+        <input type="text" name="NewQuestion.Answers[1].Text" class="form-control qoption" placeholder="odgovor na pitanje" />
+        <label>Tacan odgovor: </label>
+        @Html.EditorFor(x => x.NewQuestion.Answers[1].IsCorrect)    <br />
+
+        <button class="btn btn-sm addAnswerBtn" onclick="addAnswerOption(this)">Dodaj odgovor</button>
+        <br />
+        <br />
+        <input type="text" hidden="hidden" value="@Model.QuizvId" name="QuizvId" />
+        <input type="submit" value="Dodaj pitanje" class="btn btn-primary" />
+    }
+</div>
+<div class="col-md-6">
+    <h2>
+        @Model.QuizName
+    </h2>
+    @foreach (var question in Model.Questions)
+            {
+        <label>Pitanje: @question.Text</label>
+        foreach (var answer in question.Answers)
+        {
+            if (answer.IsCorrect)
+            {
+                <p style="color:lightgreen">@answer.Text</p>
+            }
+            else
+            {
+                <p>@answer.Text</p>
+            }
+        }
+    }
+</div>

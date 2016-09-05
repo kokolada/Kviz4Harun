@@ -1,0 +1,54 @@
+﻿@model Kviz4Harun.ViewModels.Teacher.TeacherIndexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+    <h1>@Model.username</h1>
+    <a href="/Teacher/NewQuiz" class="btn btn-primary btn-lg">Kreiraj kviz</a>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Kvizovi</h2>
+        <hr />
+        <ul class="list-unstyled">
+            <li>
+                <h2>
+                    <strong>Naziv | Broj pitanja | Datum Kreiranja - Kreirao | uredi</strong>
+                </h2>
+            </li>
+            @foreach (var quiz in Model.AvailableQuizes)
+            {
+                <li>
+                    <h2>
+                        @quiz.Name | @quiz.QuestionCount | @quiz.CreatedAt.ToString("dd.mm.yyyy.") - @quiz.CreatedBy |
+                        @Html.ActionLink("uredi", "EditQuiz", new { vId = quiz.vId })
+                    </h2>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <h2>Sesije</h2>
+        <hr />
+        <ul class="list-unstyled">
+            <li>
+                <h2>
+                    <strong>Naziv | Rezultat | Datum igranja - Trajanje(minute) | igraj</strong>
+                </h2>
+            </li>
+            @foreach (var session in Model.QuizSessions)
+            {
+                <li>
+                    <h2>
+                        @session.QuizName | @session.ResultPercentage | @session.StartDate.ToString("dd.mm.yyyy.") - @session.QuizDuration | <a href="/Quiz/NewSession/@session.QuizvId">igraj</a>
+                    </h2>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
